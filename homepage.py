@@ -15,7 +15,6 @@ st.markdown('### 需要确认，该空表格严格按照如下格式对表头标
 st.image('image/main_error_format.jpg')
 
 main_error_path = st.sidebar.file_uploader("上传重要故障的空表格，文件格式要求为xlsx")
-main_error = pd.read_excel(main_error_path)
 main_error = pd.read_excel(main_error_path if main_error_path else '数据示例/重复故障.xlsx')
 st.write(main_error)
 
