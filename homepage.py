@@ -15,11 +15,8 @@ st.markdown('### 需要确认，该空表格严格按照如下格式对表头标
 st.image('image/main_error_format.jpg')
 
 main_error_path = st.sidebar.file_uploader("上传重要故障的空表格，文件格式要求为xlsx")
-try:
-    main_error = pd.read_excel(main_error_path)
-except:
-    print('未上传文件')
-    main_error = pd.read_excel('数据示例/重复故障.xlsx')
+main_error = pd.read_excel(main_error_path)
+main_error = pd.read_excel(main_error_path if main_error_path else '数据示例/重复故障.xlsx')
 st.write(main_error)
 
 st.title('当月所有故障的统计表')
@@ -27,11 +24,7 @@ st.markdown('### 需要确认，停机记录表格严格按照如下格式对表
 st.image('image/all_error_record_format.jpg')
 
 error_all_path = st.sidebar.file_uploader("上传所有故障的表格，文件格式要求为xlsx")
-try:
-    error_all = pd.read_excel(error_all_path)
-except:
-    print('未上传文件')
-    error_all = pd.read_excel('数据示例/昆头岭明阳4月故障.xlsx')
+error_all = pd.read_excel(error_all_path if error_all_path else '数据示例/昆头岭明阳4月故障.xlsx')
 
 st.write(error_all)
 
