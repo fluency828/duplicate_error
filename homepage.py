@@ -7,8 +7,9 @@ import io
 
 ########################## 正式开始网页！###################
 
+st.title('长停故障记录分析')
 
-st.title('需要计算的空表格')
+st.markdown('# 需要计算的空表格')
 st.markdown('### 需要确认，该空表格严格按照如下格式对表头标题进行命名')
 st.image('image/main_error_format.jpg')
 
@@ -16,7 +17,7 @@ main_error_path = st.sidebar.file_uploader("上传重要故障的空表格，文
 main_error = pd.read_excel(main_error_path if main_error_path else '数据示例/重复故障.xlsx')
 st.write(main_error)
 
-st.title('当月所有故障的统计表')
+st.markdown('# 当月所有故障的统计表')
 st.markdown('### 需要确认，停机记录表格严格按照如下格式对表头标题进行命名')
 st.image('image/all_error_record_format.jpg')
 
@@ -30,7 +31,7 @@ month = st.sidebar.selectbox(label = '请选择月份',options=list(np.arange(1,
 manual_path = st.sidebar.file_uploader("故障处理手册，文件格式要求为xlsx")
 manual_df =  pd.read_excel(error_all_path if manual_path else '数据示例/error_manual.xlsx')
 
-st.markdown('#### 故障手册')
+st.markdown('# 故障复位手册')
 st.write(manual_df)
 manual = manual_df.set_index('长时间停机故障').T.to_dict()
 # st.write(manual)
@@ -107,7 +108,8 @@ main_error['TOP6风机故障原因和解决方案']=''
 main_error = main_error[['风机名称', '长时间停机故障', '上个月重复性故障', '时长', 'day_time',  'TOP6风机故障原因和解决方案','备注',
        '数据说明']]
 
-st.title('计算结果')
+st.markdown('# 计算结果')
+st.markdown('#### 请确保在左侧侧边栏中选择了正确的月份')
 st.write(main_error)
 
 
@@ -119,6 +121,6 @@ def to_excel(df):
     output.close()
     return processed_data
 df_csv = to_excel(main_error)
-st.download_button(label='📥 Download Current Result',
+st.download_button(label='📥 点击下载计算结果',
                                 data=df_csv,
                                 file_name= '长停故障.xlsx')
